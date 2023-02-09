@@ -7,7 +7,8 @@ import mysql from "mysql";
 //   database: "lerandom",
 // });
 
-export const db = mysql.createConnection({
+export const db = mysql.createPool({
+  connectionLimit: 100,
   host: "sql9.freesqldatabase.com",
   user: "sql9597044",
   password: "5H4BmcweNa",
