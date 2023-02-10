@@ -21,7 +21,7 @@ export const addProduct = async (req, res) => {
 
 export const addGiftAndFragrance = async (req, res) => {
   const qp =
-    "INSERT INTO gifts(`title`,`desc` ,`price`, `category`,`image`) VALUES (?)";
+    "INSERT INTO gifts(`title`,`desc` ,`price`, `category`,`image`,`type`) VALUES (?)";
 
   const giftValues = [
     req.body.title,
@@ -29,6 +29,7 @@ export const addGiftAndFragrance = async (req, res) => {
     req.body.price,
     req.body.category,
     req.body.image,
+    "gifts",
   ];
 
   db.query(qp, [giftValues], (err, dataP) => {

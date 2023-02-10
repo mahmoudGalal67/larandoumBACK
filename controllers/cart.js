@@ -12,8 +12,15 @@ export const getCart = async (req, res) => {
   }
 };
 export const addCart = async (req, res) => {
-  const q =
-    "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`color`,`size`,`type`) VALUES (?)";
+  let q;
+  if (req.type === "gifts") {
+    q =
+      "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`color`,`size`,`type`) VALUES (?)";
+  } else {
+    q =
+      "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`type`) VALUES (?)";
+  }
+
   const cart = [
     req.params.userId,
     req.body.id,
@@ -21,8 +28,6 @@ export const addCart = async (req, res) => {
     req.body.desc,
     req.body.price,
     req.body.image,
-    req.body.color,
-    req.body.size,
     req.body.type,
   ];
   try {
