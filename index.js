@@ -35,8 +35,13 @@ const upload = multer({
   limits: { fileSize: 52428800, fieldSize: 52428800 },
 });
 app.post("/api/upload", upload.single("file"), (req, res) => {
-  res.send("file uploaded");
+  try {
+    res.send("file uploaded");
+  } catch (err) {
+    res.send(err);
+  }
 });
+
 
 app.get("/admin", verifyAdmin);
 
