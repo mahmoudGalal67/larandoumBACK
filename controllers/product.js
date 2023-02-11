@@ -48,12 +48,16 @@ export const addProductcolors = (req, res) => {
 };
 
 export const addProductimages = (req, res) => {
-  const qc = "INSERT INTO images(`productId`,`image`) VALUES (?)";
+  const qc = "INSERT INTO images(`productId`,`image`,`color`) VALUES (?)";
 
-  db.query(qc, [[req.body.productId, req.body.image]], (err, dataS) => {
-    if (err) return res.status(500).json(err);
-    res.status(201).json("ok");
-  });
+  db.query(
+    qc,
+    [[req.body.productId, req.body.image, req.body.color]],
+    (err, dataS) => {
+      if (err) return res.status(500).json(err);
+      res.status(201).json("ok");
+    }
+  );
 };
 
 export const addProductsizes = (req, res) => {

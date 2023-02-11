@@ -23,9 +23,9 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/");
+    cb(null, "uploads");
   },
-  filename: (req, file, cb) => {
+  filename: function (req, file, cb) {
     cb(null, req.body.name);
   },
 });
@@ -41,6 +41,14 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     res.send(err);
   }
 });
+
+// app.post("/api/uploads", upload.array("files", 10), function (req, res, err) {
+//   try {
+//     res.end();
+//   } catch (err) {
+//     res.send(err);
+//   }
+// });
 
 app.get("/admin", verifyAdmin);
 
