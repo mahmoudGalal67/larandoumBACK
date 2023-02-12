@@ -13,7 +13,7 @@ export const getWishlist = async (req, res) => {
 };
 export const addWishlist = async (req, res) => {
   const q =
-    "INSERT INTO wishlist(`id`,`userId`,`title` ,`desc`,`price`,`image`) VALUES (?)";
+    "INSERT INTO wishlist(`id`,`userId`,`title` ,`desc`,`price`,`image`,`type`,`category`) VALUES (?)";
   const wishlist = [
     req.body.id,
     req.params.userId,
@@ -21,6 +21,8 @@ export const addWishlist = async (req, res) => {
     req.body.desc,
     req.body.price,
     req.body.image,
+    req.body.type,
+    req.body.category,
   ];
   try {
     db.query(q, [wishlist], (err, data) => {

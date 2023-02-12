@@ -13,9 +13,9 @@ export const getCart = async (req, res) => {
 };
 export const addCart = async (req, res) => {
   let q;
-  if (req.type === "gifts") {
+  if (req.type !== "gifts") {
     q =
-      "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`color`,`size`,`type`) VALUES (?)";
+      "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`type`,`category`,`color`,`size`) VALUES (?)";
   } else {
     q =
       "INSERT INTO cart(`userId`,`productId`,`title` ,`desc`,`price`,`image`,`type`) VALUES (?)";
@@ -29,6 +29,9 @@ export const addCart = async (req, res) => {
     req.body.price,
     req.body.image,
     req.body.type,
+    req.body.category,
+    req.body.color,
+    req.body.size,
   ];
   try {
     db.query(q, [cart], (err, data) => {
